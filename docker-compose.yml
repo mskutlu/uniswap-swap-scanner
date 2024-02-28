@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    environment:
+      SMTP_HOST: smtp.host.com
+      SMTP_PORT: 465
+      EMAIL_USER: test@mail.com
+      EMAIL_PASS: password
+      REDIS_URL: redis://redis
+      EMAIL_THRESHOLD: 500000
+      RECIPIENT_EMAIL: recipient@mail.com
+      UNISWAP_PROTOCOL_VERSION: v3
+      UNISWAP_V3_GRAPH_URL: https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3
+      UNISWAP_V2_GRAPH_URL: https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2
+      NOTIFICATION_SEND_INTERVAL: 14400000 # 4 hours in unix time 864000000
+      TELEGRAM_TOKEN: telegram-token
+      TELEGRAM_CHAT_ID: chat-id
+      NOTIFICATION_TYPE: telegram
+    depends_on:
+      - redis
+  redis:
+    image: "redis:alpine"
